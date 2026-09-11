@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk — Portal Kinerja TP-OP BBWS Brantas</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<style>
+body{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(251,185,23,.18), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(37,99,235,.14), transparent 45%),
+    var(--bg);
+}
+
+.login-wrap{
+  width:min(960px, 100%);
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:32px;
+  box-shadow:var(--shadow-lg);
+  overflow:hidden;
+  animation:loginIn .55s cubic-bezier(.2,.9,.3,1.05);
+}
+@keyframes loginIn{from{opacity:0;transform:translateY(24px) scale(.97)}}
+
+/* KIRI */
+.login-brand{
+  background:linear-gradient(155deg, var(--yellow) 0%, #FCD34D 55%, #FBB917 100%);
+  padding:44px 40px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.login-brand::before{
+  content:"";position:absolute;width:340px;height:340px;
+  right:-120px;bottom:-120px;border-radius:50%;background:rgba(30,58,138,.08);
+}
+.login-brand::after{
+  content:"";position:absolute;width:220px;height:220px;
+  right:-60px;bottom:-60px;border-radius:50%;background:rgba(30,58,138,.06);
+}
+.lb-logo{display:flex;gap:14px;align-items:center;position:relative;z-index:1}
+.lb-logo svg{flex:none}
+.lb-logo b{font:800 18px var(--font);letter-spacing:-.01em;display:block;line-height:1.15;color:var(--ink)}
+.lb-logo small{font:700 10.5px var(--font);letter-spacing:.12em;text-transform:uppercase;color:rgba(30,58,138,.72)}
+.lb-hero{position:relative;z-index:1;margin:36px 0 24px}
+.lb-hero .kicker{color:rgba(30,58,138,.7);font:800 11px var(--font);letter-spacing:.14em}
+.lb-hero h1{font:800 clamp(28px,3.4vw,38px)/1.15 var(--font);letter-spacing:-.02em;color:var(--ink);margin:10px 0 12px}
+.lb-hero p{font:500 14.5px/1.6 var(--font);color:rgba(30,58,138,.82);max-width:340px}
+.lb-features{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px}
+.lb-feat{
+  display:flex;align-items:center;gap:10px;font:600 13px var(--font);color:var(--ink);
+  background:rgba(255,255,255,.42);border:1px solid rgba(30,58,138,.12);
+  padding:9px 14px;border-radius:99px;width:fit-content;backdrop-filter:blur(4px);
+}
+.lb-feat svg{width:15px;height:15px}
+
+/* KANAN */
+.login-form{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.login-form .kicker{color:var(--muted)}
+.login-form h2{font:800 26px var(--font);letter-spacing:-.02em;color:var(--ink);margin:8px 0 6px}
+.login-form > p{font:500 14px/1.55 var(--font);color:var(--ink-2);margin-bottom:22px}
+
+/* Role picker */
+.role-pick{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:8px}
+.role-opt{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;
+  border:1.5px solid var(--line);border-radius:16px;background:#fff;
+  cursor:pointer;transition:.18s;text-align:left;width:100%;
+}
+.role-opt:hover{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-1px)}
+.role-opt.on{border-color:var(--ink);background:var(--yellow-soft);box-shadow:0 6px 18px -8px rgba(30,58,138,.28)}
+.role-opt .ro-ic{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  flex:none;background:var(--bg);color:var(--ink);transition:.18s;
+}
+.role-opt.on .ro-ic{background:var(--ink);color:var(--yellow)}
+.role-opt .ro-ic svg{width:20px;height:20px}
+.role-opt .ro-txt b{display:block;font:700 14px var(--font);color:var(--ink);line-height:1.2}
+.role-opt .ro-txt small{font:500 12.5px var(--font);color:var(--muted)}
+.role-opt .ro-check{
+  margin-left:auto;width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--line);display:grid;place-items:center;flex:none;transition:.18s;
+}
+.role-opt.on .ro-check{background:var(--ink);border-color:var(--ink);color:var(--yellow)}
+.role-opt .ro-check svg{width:12px;height:12px;opacity:0;transition:.18s}
+.role-opt.on .ro-check svg{opacity:1}
+
+/* Password toggle */
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:46px}
+.pw-toggle{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  border:0;background:transparent;width:36px;height:36px;
+  border-radius:50%;display:grid;place-items:center;
+  color:var(--muted);transition:.15s;
+}
+.pw-toggle:hover{background:var(--bg);color:var(--ink)}
+.pw-toggle svg{width:16px;height:16px}
+
+/* Demo hint */
+.demo-hint{
+  display:flex;align-items:flex-start;gap:10px;margin-top:18px;
+  padding:12px 14px;background:var(--bg);border:1px dashed var(--line);
+  border-radius:14px;font:500 12.5px/1.5 var(--font);color:var(--ink-2);
+}
+.demo-hint svg{width:16px;height:16px;color:var(--amber);flex:none;margin-top:1px}
+.demo-hint b{color:var(--ink);font-weight:700}
+
+/* Mode switch banner */
+.mode-banner{
+  display:flex;align-items:center;gap:8px;justify-content:center;
+  margin-bottom:16px;padding:8px 14px;border-radius:99px;
+  font:700 11.5px var(--font);letter-spacing:.06em;text-transform:uppercase;
+  background:var(--green-soft);color:#166534;
+}
+.mode-banner.prod{background:var(--blue-soft);color:var(--blue-dark)}
+.mode-banner svg{width:14px;height:14px}
+
+.login-foot{margin-top:20px;font:500 12px/1.5 var(--font);color:var(--muted);text-align:center}
+
+@media (max-width:820px){
+  .login-wrap{grid-template-columns:1fr;max-width:480px}
+  .login-brand{padding:32px 28px;min-height:auto}
+  .lb-hero{margin:20px 0 18px}
+  .lb-hero h1{font-size:24px}
+  .lb-hero p{font-size:13.5px}
+  .lb-features{flex-direction:row;flex-wrap:wrap;gap:8px}
+  .lb-feat{font-size:12px;padding:7px 12px}
+  .login-form{padding:32px 28px}
+  .login-form h2{font-size:22px}
+}
+@media (max-width:420px){
+  .login-brand{padding:26px 22px}
+  .login-form{padding:26px 22px}
+  .role-opt{padding:12px 14px}
+  .role-opt .ro-ic{width:36px;height:36px}
+}
+</style>
+</head>
+<body>
+
+<div class="login-wrap">
+
+  <!-- KIRI -->
+  <div class="login-brand">
+    <div class="lb-logo">
+      <svg viewBox="0 0 44 44" width="46" height="46" aria-hidden="true">
+        <rect width="44" height="44" rx="13" fill="#1E3A8A"/>
+        <path d="M22 8.5c3.6 4.3 6 7.6 6 10.6a6 6 0 1 1-12 0c0-3 2.4-6.3 6-10.6z" fill="#FBB917"/>
+        <path d="M10 33.5c2.2-2.6 4.4-2.6 6.6 0s4.4 2.6 6.6 0 4.4-2.6 6.6 0 4.4 2.6 6.6 0" stroke="#FBB917" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <b>BBWS Brantas</b>
+        <small>Kementerian PUPR</small>
+      </div>
+    </div>
+
+    <div class="lb-hero">
+      <span class="kicker">Portal Kinerja</span>
+      <h1>Tenaga Operasi &amp; Pemeliharaan Irigasi</h1>
+      <p>Platform digital untuk presensi lapangan, pelaporan operasi pintu air, pemeliharaan saluran, dan koordinasi dengan HIPPA/GHIPPA.</p>
+    </div>
+
+    <div class="lb-features">
+      <span class="lb-feat"><i data-lucide="map-pin"></i> Presensi GPS + foto lapangan</span>
+      <span class="lb-feat"><i data-lucide="droplets"></i> Log operasi pintu air</span>
+      <span class="lb-feat"><i data-lucide="users"></i> Koordinasi HIPPA/GHIPPA</span>
+    </div>
+  </div>
+
+  <!-- KANAN -->
+  <div class="login-form">
+
+    <!-- Banner mode (dinamis dari config.js) -->
+    <div class="mode-banner" id="modeBanner">
+      <i data-lucide="flask-conical"></i>
+      <span id="modeLabel">Mode Demo — Tanpa Password</span>
+    </div>
+
+    <span class="kicker">Masuk Portal</span>
+    <h2>Pilih peran Anda</h2>
+    <p>Gunakan NIP/NSP/NPA/NPK untuk masuk.</p>
+
+    <form id="loginForm" novalidate>
+
+      <!-- NIP -->
+      <div class="field" id="fNip">
+        <label for="inNip">NIP / NSP / NPA / NPK</label>
+        <input id="inNip" placeholder="cth: NSP.05.84.15.13.027" autocomplete="username">
+        <span class="err" id="errNip">Masukkan NIP/NSP/NPA/NPK minimal 8 karakter.</span>
+      </div>
+
+      <!-- PASSWORD (muncul hanya di mode production) -->
+      <div class="field" id="fPw" hidden>
+        <label for="inPw">Kata Sandi</label>
+        <div class="pw-wrap">
+          <input id="inPw" type="password" placeholder="Masukkan kata sandi" autocomplete="current-password">
+          <button type="button" class="pw-toggle" id="pwToggle" aria-label="Tampilkan kata sandi">
+            <i data-lucide="eye"></i>
+          </button>
+        </div>
+        <span class="err" id="errPw">Kata sandi minimal 6 karakter.</span>
+      </div>
+
+      <!-- Role picker -->
+      <label class="kicker" style="display:block;margin-bottom:10px">Peran</label>
+      <div class="role-pick" id="rolePick">
+        <button type="button" class="role-opt on" data-role="korlap">
+          <span class="ro-ic"><i data-lucide="clipboard-check"></i></span>
+          <span class="ro-txt">
+            <b>Staf Pengamat (Korlap)</b>
+            <small>Koordinator lapangan · verifikasi laporan &amp; presensi</small>
+          </span>
+          <span class="ro-check"><i data-lucide="check"></i></span>
+        </button>
+
+        <button type="button" class="role-opt" data-role="ppa">
+          <span class="ro-ic"><i data-lucide="droplets"></i></span>
+          <span class="ro-txt">
+            <b>Petugas Pintu Air (PPA)</b>
+            <small>Operasi pintu · pencatatan debit air</small>
+          </span>
+          <span class="ro-check"><i data-lucide="check"></i></span>
+        </button>
+
+        <button type="button" class="role-opt" data-role="pekarya">
+          <span class="ro-ic"><i data-lucide="shovel"></i></span>
+          <span class="ro-txt">
+            <b>Pekarya Pengairan</b>
+            <small>Pemeliharaan ruas saluran · pembersihan sedimen</small>
+          </span>
+          <span class="ro-check"><i data-lucide="check"></i></span>
+        </button>
+      </div>
+
+      <!-- Tombol masuk -->
+      <button class="btn btn-blue btn-block" type="submit" style="margin-top:22px;padding:15px 20px;font-size:15px">
+        <i data-lucide="log-in"></i> Masuk Portal
+      </button>
+
+      <!-- Demo hint (muncul hanya di mode demo) -->
+      <div class="demo-hint" id="demoHint">
+        <i data-lucide="info"></i>
+        <div>
+          <b>Mode Demo.</b> NIP boleh dikosongkan. Cukup pilih peran, lalu klik Masuk.
+        </div>
+      </div>
+
+    </form>
+
+    <p class="login-foot">
+      Balai Besar Wilayah Sungai Brantas<br>
+      Direktorat Jenderal Sumber Daya Air · Kementerian PUPR
+    </p>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script>
+/* ============ KONFIGURASI MODE ============ */
+// Ubah ke 'production' jika sudah pakai Supabase + password
+const MODE = 'demo'; // 'demo' | 'production'
+
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+/* ============ TAMPILKAN FIELD PASSWORD JIKA PRODUCTION ============ */
+if (MODE === 'production') {
+  $('#fPw').hidden = false;
+  $('#demoHint').hidden = true;
+  $('#modeBanner').classList.add('prod');
+  $('#modeBanner').innerHTML = '<i data-lucide="shield-check"></i><span>Mode Produksi — Wajib Password</span>';
+}
+
+/* ============ ROLE PICKER ============ */
+let selectedRole = 'korlap';
+
+$$('#rolePick .role-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('#rolePick .role-opt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    selectedRole = btn.dataset.role;
+    $('#fNip').classList.remove('invalid');
+  });
+});
+
+/* ============ TOGGLE PASSWORD ============ */
+$('#pwToggle')?.addEventListener('click', () => {
+  const pw = $('#inPw');
+  const isText = pw.type === 'text';
+  pw.type = isText ? 'password' : 'text';
+  $('#pwToggle').innerHTML = `<i data-lucide="${isText ? 'eye' : 'eye-off'}"></i>`;
+  lucide.createIcons();
+});
+
+/* ============ SUBMIT LOGIN ============ */
+$('#loginForm').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const nip = $('#inNip').value.trim();
+  const pw  = $('#inPw')?.value.trim() || '';
+
+  let ok = true;
+
+  // Validasi NIP
+  if (MODE === 'production' && nip.length < 8) {
+    $('#fNip').classList.add('invalid');
+    ok = false;
+  }
+  if (MODE === 'demo' && nip && nip.length < 8) {
+    $('#fNip').classList.add('invalid');
+    ok = false;
+  }
+
+  // Validasi Password (hanya di production)
+  if (MODE === 'production' && pw.length < 6) {
+    $('#fPw').classList.add('invalid');
+    ok = false;
+  }
+
+  if (!ok) {
+    if (typeof toast === 'function') toast('Periksa kembali isian Anda.', 'warn');
+    return;
+  }
+
+  // === MODE DEMO: langsung masuk ===
+  if (MODE === 'demo') {
+    const session = {
+      nip: nip || 'DEMO-' + selectedRole.toUpperCase(),
+      role: selectedRole,
+      nama: 'Pengguna Demo',
+      loginAt: new Date().toISOString(),
+      mode: 'demo'
+    };
+    localStorage.setItem('tpop_session', JSON.stringify(session));
+    window.location.href = 'dashboard.html';
+    return;
+  }
+
+  // === MODE PRODUCTION: validasi ke Supabase ===
+  // (placeholder — akan diimplementasikan di Tahap 4)
+  // Contoh:
+  // fetch(CONFIG.SUPABASE_URL + '/rest/v1/pegawai?nip=eq.' + nip, {...})
+  //   .then(r => r.json())
+  //   .then(data => { ... })
+  //   .catch(err => toast('Login gagal: ' + err.message, 'error'));
+
+  // Sementara: simulasi validasi
+  if (MODE === 'production') {
+    toast('Validasi ke Supabase belum diimplementasikan (Tahap 4).', 'info');
+  }
+});
+
+/* ============ INIT ============ */
+lucide.createIcons();
+$('#inNip').focus();
+
+// Clear error saat input
+$('#inNip').addEventListener('input', () => $('#fNip').classList.remove('invalid'));
+$('#inPw')?.addEventListener('input', () => $('#fPw').classList.remove('invalid'));
+</script>
+</body>
+</html>

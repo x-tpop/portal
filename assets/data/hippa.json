@@ -1,0 +1,7 @@
+[
+  { "id": "H001", "nama": "HIPPA Sumber Rejeki", "jenis": "HIPPA", "ketua": "Slamet Riyadi", "anggota": 120, "luas": 85.5, "krosda": "Bangorejo", "kejuron": "Bulurejo", "kontak": "0812-1111-2222" },
+  { "id": "H002", "nama": "HIPPA Tani Makmur", "jenis": "HIPPA", "ketua": "Sutrisno", "anggota": 95, "luas": 62.0, "krosda": "Bangorejo", "kejuron": "Sidorejo", "kontak": "0812-3333-4444" },
+  { "id": "H003", "nama": "HIPPA Sri Rejeki", "jenis": "HIPPA", "ketua": "Wahyudi", "anggota": 150, "luas": 110.5, "krosda": "Cluring", "kejuron": "Cluring", "kontak": "0812-5555-6666" },
+  { "id": "H004", "nama": "GHIPPA Brantas Hilir", "jenis": "GHIPPA", "ketua": "H. Suparman", "anggota": 450, "luas": 320.0, "krosda": "Pesanggaran", "kejuron": "Pesanggaran", "kontak": "0812-7777-8888" },
+  { "id": "H005", "nama": "HIPPA Sumber Urip", "jenis": "HIPPA", "ketua": "Mulyono", "anggota": 80, "luas": 55.0, "krosda": "Cluring", "kejuron": "Sraten", "kontak": "0812-9999-0000" }
+]

@@ -1,0 +1,20 @@
+{
+  "B.NGRO.1": { "nama": "Ngro.1", "lat": -8.4839932, "lng": 114.194848, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.2": { "nama": "Ngro. 2", "lat": -8.4845759, "lng": 114.1945096, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.3": { "nama": "Ngro. 3", "lat": -8.486404, "lng": 114.1950513, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.4": { "nama": "Ngro. 4", "lat": -8.4867989, "lng": 114.1950441, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.5": { "nama": "Ngro. 5", "lat": -8.487582, "lng": 114.1949891, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.6": { "nama": "Ngro. 6", "lat": -8.4876991, "lng": 114.1959109, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.7": { "nama": "Ngro. 7", "lat": -8.4876806, "lng": 114.198514, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.8": { "nama": "Ngro. 8", "lat": -8.4885344, "lng": 114.200266, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.NGRO.9": { "nama": "Ngro. 9", "lat": -8.4902719, "lng": 114.2044315, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.CG": { "nama": "Bendung Curah Gulung", "lat": -8.49397, "lng": 114.2372633, "radius": 200, "krosda": "Bangorejo", "kejuron": "Sidorejo" },
+  "B.SDO.1": { "nama": "SDO 1", "lat": -8.4886693, "lng": 114.2475244, "radius": 200, "krosda": "Bangorejo", "kejuron": "Sidorejo" },
+  "B.SDO.2": { "nama": "SDO 2", "lat": -8.4904677, "lng": 114.2523005, "radius": 200, "krosda": "Bangorejo", "kejuron": "Sidorejo" },
+  "B.TSU.1": { "nama": "TSU 1", "lat": -8.4723064, "lng": 114.1798009, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.TSU.2": { "nama": "TSU 2", "lat": -8.4731729, "lng": 114.181308, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.TSU.3": { "nama": "TSU 3", "lat": -8.4778422, "lng": 114.1831233, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.TSU.4": { "nama": "TSU 4", "lat": -8.4798406, "lng": 114.1842448, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.TSU.5": { "nama": "TSU 5", "lat": -8.4813672, "lng": 114.1840544, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "B.TSU.6": { "nama": "TSU 6", "lat": -8.4826231, "lng": 114.185121, "radius": 200, "krosda": "Bangorejo", "kejuron": "Bulurejo" }
+}

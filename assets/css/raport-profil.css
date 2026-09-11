@@ -1,0 +1,628 @@
+/* =================================================================
+   raport-profil.css — Styles untuk Raport & Profil
+   Pop-out kepala TIDAK terpotong
+   ================================================================= */
+
+/* ============ LAYOUT RAPORT ============ */
+.grid-raport{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:20px;
+  align-items:start;
+  min-width:0;
+  max-width:100%;
+}
+.grid-raport > *{
+  min-width:0;
+  max-width:100%;
+}
+
+/* ============ SKOR CARD ============ */
+.score-card{
+  background:linear-gradient(145deg, #FFFFFF, #F8FAFC);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  max-width:100%;
+}
+
+.score-card::before{
+  content:"";
+  position:absolute;
+  top:-40px;right:-40px;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(251,185,23,.15), transparent 65%);
+  pointer-events:none;
+}
+
+.score-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+/* ============ SCORE BESAR ============ */
+.score-big{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin-bottom:6px;
+}
+.score-big .sb-num{
+  font:800 clamp(48px,6vw,72px)/1 var(--mono);
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.score-big .sb-max{
+  font:600 18px var(--mono);
+  color:var(--muted);
+}
+
+/* Predikat */
+.predikat{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font:800 12px var(--font);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:7px 14px;
+  border-radius:99px;
+  margin-bottom:16px;
+}
+.predikat.sangat-baik{background:var(--green-soft);color:#166534}
+.predikat.baik{background:var(--blue-soft);color:var(--blue-dark)}
+.predikat.perbaikan{background:var(--amber-soft);color:#92400E}
+.predikat.kurang{background:var(--red-soft);color:#991B1B}
+
+/* Delta */
+.score-delta{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font:700 13px var(--mono);
+  padding:6px 12px;
+  border-radius:99px;
+  margin-bottom:18px;
+}
+.score-delta.up{
+  background:var(--green-soft);
+  color:#166534;
+}
+.score-delta.down{
+  background:var(--red-soft);
+  color:#991B1B;
+}
+.score-delta.flat{
+  background:var(--bg);
+  color:var(--ink-2);
+}
+.score-delta svg{width:14px;height:14px}
+
+/* ============ RING CHART ============ */
+.score-ring{
+  position:relative;
+  width:140px;
+  height:140px;
+  margin:20px auto;
+}
+.score-ring svg{
+  width:100%;
+  height:100%;
+  transform:rotate(-90deg);
+}
+.score-ring .sr-track{
+  fill:none;
+  stroke:var(--line);
+  stroke-width:10;
+}
+.score-ring .sr-fill{
+  fill:none;
+  stroke:var(--blue);
+  stroke-width:10;
+  stroke-linecap:round;
+  stroke-dasharray:439.8;
+  stroke-dashoffset:439.8;
+  transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1);
+}
+.score-ring .sr-fill.sangat-baik{stroke:var(--green)}
+.score-ring .sr-fill.baik{stroke:var(--blue)}
+.score-ring .sr-fill.perbaikan{stroke:var(--amber)}
+.score-ring .sr-fill.kurang{stroke:var(--red)}
+
+/* ============ BAR ASPEK ============ */
+.aspek-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:8px;
+}
+
+.aspek-item{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.aspek-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.aspek-head b{
+  font:700 13px var(--font);
+  color:var(--ink-2);
+}
+.aspek-head .aspek-val{
+  font:800 14px var(--mono);
+  color:var(--ink);
+}
+.aspek-track{
+  height:8px;
+  background:var(--line);
+  border-radius:99px;
+  overflow:hidden;
+}
+.aspek-fill{
+  height:100%;
+  border-radius:99px;
+  background:var(--blue);
+  width:0;
+  transition:width .8s cubic-bezier(.2,.8,.2,1);
+}
+.aspek-fill.sangat-baik{background:linear-gradient(90deg, var(--green), #15803D)}
+.aspek-fill.baik{background:linear-gradient(90deg, var(--blue), var(--blue-dark))}
+.aspek-fill.perbaikan{background:linear-gradient(90deg, var(--amber), #D97706)}
+.aspek-fill.kurang{background:linear-gradient(90deg, var(--red), #B91C1C)}
+
+/* ============ CATATAN KORLAP ============ */
+.catatan-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  box-shadow:var(--shadow);
+  min-width:0;
+  max-width:100%;
+}
+
+.catatan-box{
+  background:var(--yellow-soft);
+  border-left:4px solid var(--yellow);
+  border-radius:12px;
+  padding:14px 18px;
+  margin:14px 0 18px;
+  font:500 13.5px/1.65 var(--font);
+  color:var(--ink);
+  position:relative;
+}
+.catatan-box::before{
+  content:"“";
+  position:absolute;
+  top:-6px;left:10px;
+  font:800 40px var(--font);
+  color:var(--yellow);
+  opacity:.4;
+}
+
+.ttd-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding-top:14px;
+  border-top:1px dashed var(--line);
+}
+.ttd-avatar{
+  width:48px;height:48px;
+  border-radius:50%;
+  background:var(--yellow);
+  border:2px solid var(--ink);
+  object-fit:cover;
+  flex:none;
+}
+.ttd-info b{
+  display:block;
+  font:800 13.5px var(--font);
+  color:var(--ink);
+}
+.ttd-info small{
+  font:500 11.5px var(--font);
+  color:var(--muted);
+}
+
+/* ============ RIWAYAT SEMESTER ============ */
+.rekap-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.rekap-table tr{
+  cursor:pointer;
+  transition:.15s;
+}
+.rekap-table tr:hover{background:var(--bg)}
+.rekap-table tr.on{background:var(--yellow-soft)}
+.rekap-table td{
+  padding:12px 14px;
+  border-bottom:1px solid var(--line-soft);
+  font:500 13px var(--font);
+}
+.rekap-table tr:last-child td{border-bottom:0}
+.rekap-table .rp-sem{
+  font:800 13.5px var(--font);
+  color:var(--ink);
+}
+.rekap-table .rp-num{
+  font:700 14px var(--mono);
+  color:var(--ink);
+}
+.rekap-table .rp-pred{
+  font:800 10.5px var(--font);
+  padding:3px 9px;
+  border-radius:99px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+/* =================================================================
+   PROFIL — FIX POP-OUT KEPALA
+   ================================================================= */
+.grid-profil{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:20px;
+  align-items:start;
+  min-width:0;
+  max-width:100%;
+}
+.grid-profil > *{
+  min-width:0;
+  max-width:100%;
+}
+
+/* Kartu Profil Kiri — OVERFLOW VISIBLE agar kepala pop-out */
+.profil-card{
+  background:linear-gradient(145deg, #FFFFFF, #F8FAFC);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:56px 26px 26px;
+  box-shadow:var(--shadow);
+  text-align:center;
+  position:relative;
+  /* KUNCI: overflow visible agar kepala pop-out TIDAK terpotong */
+  overflow:visible;
+  isolation:isolate;
+  min-width:0;
+  max-width:100%;
+}
+
+/* Kicker "KARTU PEGAWAI" di kiri atas */
+.profil-card > .kicker,
+.profil-card-head .kicker{
+  position:absolute;
+  top:22px;
+  left:26px;
+  text-align:left;
+  z-index:2;
+}
+
+/* Header card (kalau pakai struktur baru) */
+.profil-card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding-bottom:14px;
+  margin-bottom:22px;
+  border-bottom:1px dashed var(--line);
+  position:relative;
+  z-index:2;
+}
+.profil-card-head .kicker{
+  position:static;
+  text-align:left;
+  margin:0;
+}
+
+.profil-card-body{
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+/* ============ PROFIL AVATAR — POP-OUT KEPALA ============ */
+.profil-avatar-wrap{
+  position:relative;
+  width:200px;
+  height:200px;
+  /* KUNCI: margin atas besar untuk ruang kepala pop-out */
+  margin:56px auto 30px;
+  border-radius:50%;
+  background:transparent;
+  /* KUNCI: overflow visible agar kepala keluar */
+  overflow:visible;
+  isolation:isolate;
+}
+
+/* Lingkaran kuning di belakang foto */
+.profil-avatar-wrap::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:linear-gradient(145deg, var(--yellow), #FCD34D);
+  border:3px solid var(--ink);
+  box-shadow:0 12px 32px -12px rgba(251,185,23,.5);
+  z-index:1;
+}
+
+/* Foto — pop-out ke atas */
+.profil-avatar-wrap img{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:auto;
+  height:165%;
+  max-width:none;
+  object-fit:contain;
+  object-position:bottom center;
+  z-index:2;
+  filter:drop-shadow(0 10px 24px rgba(30,58,138,.3));
+  pointer-events:none;
+  transition:transform .3s ease;
+}
+
+/* Hover effect */
+.profil-avatar-wrap:hover img{
+  transform:translateX(-50%) scale(1.02);
+}
+
+/* Tombol edit foto */
+.profil-avatar-wrap .pa-edit{
+  position:absolute;
+  bottom:4px;
+  right:4px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--ink);
+  color:var(--yellow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  border:3px solid #fff;
+  box-shadow:0 4px 12px rgba(30,58,138,.3);
+  transition:.15s;
+  z-index:4;
+}
+.profil-avatar-wrap .pa-edit:hover{
+  transform:scale(1.1);
+  background:var(--blue);
+}
+.profil-avatar-wrap .pa-edit svg{
+  width:16px;
+  height:16px;
+}
+
+.profil-card h3{
+  font:800 20px var(--font);
+  color:var(--ink);
+  margin-bottom:4px;
+  position:relative;
+  z-index:1;
+}
+.profil-role{
+  font:700 13px var(--font);
+  color:var(--blue);
+  margin-bottom:16px;
+  position:relative;
+  z-index:1;
+}
+
+.profil-chips{
+  display:flex;
+  gap:6px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+  position:relative;
+  z-index:1;
+}
+
+.profil-meta{
+  list-style:none;
+  text-align:left;
+  margin:0;
+  padding:0;
+  position:relative;
+  z-index:1;
+}
+.profil-meta li{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font:500 13px var(--font);
+  color:var(--ink-2);
+  padding:10px 4px;
+  border-bottom:1px dashed var(--line);
+}
+.profil-meta li:last-child{border-bottom:0}
+.profil-meta svg{
+  width:16px;height:16px;
+  color:var(--blue);
+  flex:none;
+}
+
+/* =================================================================
+   TIMELINE KONTRIBUSI
+   ================================================================= */
+.timeline-kontribusi{
+  position:relative;
+  padding-left:32px;
+  margin-top:14px;
+}
+.timeline-kontribusi::before{
+  content:"";
+  position:absolute;
+  left:12px;
+  top:8px;
+  bottom:8px;
+  width:2px;
+  background:linear-gradient(to bottom, var(--blue), var(--yellow));
+  border-radius:99px;
+}
+
+.tk-item{
+  position:relative;
+  padding-bottom:20px;
+}
+.tk-item:last-child{padding-bottom:0}
+
+.tk-item::before{
+  content:"";
+  position:absolute;
+  left:-26px;
+  top:4px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#fff;
+  border:3px solid var(--blue);
+  z-index:1;
+  box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+.tk-item.done::before{
+  background:var(--green);
+  border-color:var(--green);
+  box-shadow:0 0 0 4px rgba(22,163,74,.1);
+}
+.tk-item.future::before{
+  background:#fff;
+  border-color:var(--line);
+  box-shadow:0 0 0 4px rgba(226,232,240,.5);
+}
+.tk-item.future .tk-year,
+.tk-item.future .tk-title{
+  color:var(--muted);
+}
+
+.tk-year{
+  font:800 12px var(--mono);
+  color:var(--blue);
+  margin-bottom:2px;
+}
+.tk-title{
+  font:800 14px var(--font);
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.tk-desc{
+  font:500 12.5px/1.5 var(--font);
+  color:var(--ink-2);
+}
+
+/* =================================================================
+   STATISTIK PORTOFOLIO
+   ================================================================= */
+.portofolio-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px;
+}
+
+.pf-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  background:var(--bg);
+  border-radius:14px;
+  border:1px solid var(--line-soft);
+}
+
+.pf-item .pf-ic{
+  width:42px;height:42px;
+  border-radius:99px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+}
+.pf-item .pf-ic svg{width:20px;height:20px}
+
+.pf-item b{
+  display:block;
+  font:800 20px var(--mono);
+  color:var(--ink);
+  line-height:1;
+  margin-bottom:2px;
+}
+.pf-item span{
+  font:700 10px var(--font);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* =================================================================
+   RESPONSIF
+   ================================================================= */
+@media (max-width:1100px){
+  .grid-raport,
+  .grid-profil{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:560px){
+  .score-big .sb-num{font-size:52px}
+  .score-ring{width:120px;height:120px}
+
+  /* Avatar lebih kecil di HP */
+  .profil-avatar-wrap{
+    width:150px;
+    height:150px;
+    margin:44px auto 24px;
+  }
+  .profil-avatar-wrap img{
+    height:165%;
+  }
+
+  .portofolio-grid{grid-template-columns:1fr}
+  .timeline-kontribusi{padding-left:28px}
+  .timeline-kontribusi::before{left:10px}
+  .tk-item::before{left:-22px;width:12px;height:12px}
+}
+
+@media (max-width:920px){
+  .grid-raport,
+  .grid-profil{
+    grid-template-columns:1fr!important;
+    min-width:0;
+  }
+  .grid-raport > *,
+  .grid-profil > *{
+    min-width:0;
+    max-width:100%;
+  }
+  .score-card,
+  .catatan-card{
+    max-width:100%;
+    overflow:hidden;
+  }
+  /* PENTING: profil-card harus tetap overflow visible */
+  .profil-card{
+    max-width:100%;
+    overflow:visible!important;
+  }
+}

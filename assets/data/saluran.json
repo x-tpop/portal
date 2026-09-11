@@ -1,0 +1,12 @@
+{
+  "S001": { "ruas": "Sekunder Glagahagung", "dari": "B.BGA. 2c", "ke": "B.BGA. 2f", "panjang": 1200, "krosda": "Bangorejo", "kejuron": "Temurejo" },
+  "S002": { "ruas": "Primer Baru", "dari": "B.BU. 5a", "ke": "B.BU. 5", "panjang": 800, "krosda": "Bangorejo", "kejuron": "Karangdoro" },
+  "S003": { "ruas": "Primer Baru", "dari": "B.BU. 3b", "ke": "B.BU. 5a", "panjang": 950, "krosda": "Bangorejo", "kejuron": "Karangdoro" },
+  "S004": { "ruas": "Sekunder Bulurejo", "dari": "B.BLU. 1a", "ke": "B.BLU. 2c", "panjang": 1100, "krosda": "Bangorejo", "kejuron": "Bulurejo" },
+  "S005": { "ruas": "Primer Baru", "dari": "B.BU. 1a", "ke": "B.BU. 3b", "panjang": 1050, "krosda": "Bangorejo", "kejuron": "Karangdoro" },
+  "S006": { "ruas": "Sekunder Bangorejo", "dari": "B.BGO. 1a", "ke": "B.BGO. 3", "panjang": 900, "krosda": "Bangorejo", "kejuron": "Bangorejo" },
+  "S007": { "ruas": "Sekunder Sambirejo", "dari": "B.SBI. 1a", "ke": "B.SBI. 1", "panjang": 750, "krosda": "Bangorejo", "kejuron": "Sambirejo" },
+  "S008": { "ruas": "Sekunder Wringinpitu", "dari": "B.WPT. 1a", "ke": "B.WPT. 3c", "panjang": 1300, "krosda": "Bangorejo", "kejuron": "Sidorejo" },
+  "S009": { "ruas": "Sekunder Sidorejo", "dari": "B.SDO. 0", "ke": "B.SDO. 2", "panjang": 1000, "krosda": "Bangorejo", "kejuron": "Sidorejo" },
+  "S010": { "ruas": "Sekunder Barurejo", "dari": "BRO. 1a", "ke": "BRO. 3", "panjang": 850, "krosda": "Bangorejo", "kejuron": "Karangdoro" }
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dashboard — Portal Kinerja TP-OP BBWS Brantas</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/portal.css">
+<link rel="stylesheet" href="assets/css/dashboard.css">
+<link rel="stylesheet" href="assets/css/presensi.css">
+<link rel="stylesheet" href="assets/css/operasi.css">
+<link rel="stylesheet" href="assets/css/laporan.css">
+<link rel="stylesheet" href="assets/css/raport-profil.css">
+<link rel="stylesheet" href="assets/css/profil.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+<div class="main">
+  <div class="wrap">
+    <main>
+
+      <!-- ============ PAGE: DASHBOARD ============ -->
+      <section class="page active" data-page="dashboard">
+        <div id="dashHero"></div>
+        <div class="stats-grid" id="dashStats"></div>
+
+        <div class="card map-card" style="margin-top:26px">
+          <div class="card-head">
+            <div>
+              <span class="kicker">Peta Wilayah Kerja</span>
+              <h3 id="mapTitle">Sebaran Titik Tugas</h3>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <span class="meta-chip"><i data-lucide="map-pin"></i><span id="mapCount">0</span> titik</span>
+              <div class="map-legend">
+                <span class="ml-item"><span class="ml-dot ml-korlap"></span>Korlap</span>
+                <span class="ml-item"><span class="ml-dot ml-ppa"></span>PPA</span>
+                <span class="ml-item"><span class="ml-dot ml-pekarya"></span>Pekarya</span>
+              </div>
+            </div>
+          </div>
+          <div id="mapDashboard"></div>
+        </div>
+
+        <div id="dashRoleContent" style="margin-top:26px"></div>
+      </section>
+
+      <!-- ============ PAGE: PRESENSI ============ -->
+      <section class="page" data-page="presensi">
+        <div class="grid-presensi">
+          <div class="pres-card">
+            <div class="pres-hero" id="presHero"></div>
+            <div class="pres-timeline-card">
+              <div id="presTimeline" class="ptl"></div>
+            </div>
+            <div>
+              <span class="kicker" style="display:block;margin-bottom:10px">Foto Bukti</span>
+              <div class="cam-grid">
+                <div class="cam-box" id="camSelfie" role="button" tabindex="0">
+                  <div class="cb-ic"><i data-lucide="camera"></i></div>
+                  <div class="cb-txt">
+                    <b>Foto Selfie</b>
+                    <small>Ketuk untuk ambil</small>
+                  </div>
+                </div>
+                <div class="cam-box" id="camLokasi" role="button" tabindex="0">
+                  <div class="cb-ic"><i data-lucide="image"></i></div>
+                  <div class="cb-txt">
+                    <b>Foto Lokasi</b>
+                    <small>Ketuk untuk ambil</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="presActions"></div>
+          </div>
+
+          <div class="rekap-grid">
+            <div class="ringkasan-card">
+              <div class="card-head">
+                <div>
+                  <span class="kicker">Rekap Bulan Ini</span>
+                  <h3>Ringkasan Kehadiran</h3>
+                </div>
+              </div>
+              <div class="ring-sum" id="presRingkasan"></div>
+            </div>
+            <div class="ringkasan-card">
+              <div class="card-head">
+                <div>
+                  <span class="kicker">15 Terakhir</span>
+                  <h3>Riwayat Presensi</h3>
+                </div>
+              </div>
+              <div class="pres-history" id="presHistory"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PAGE: OPERASI ============ -->
+      <section class="page" data-page="operasi">
+        <div class="stat-row" id="opStats"></div>
+        <div class="grid-operasi">
+          <div id="opForm"></div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <span class="kicker">15 Terakhir</span>
+                <h3>Riwayat Operasi</h3>
+              </div>
+            </div>
+            <div id="opRiwayat"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PAGE: PEMELIHARAAN ============ -->
+      <section class="page" data-page="pemeliharaan">
+        <div class="stat-row" id="pemStats"></div>
+        <div class="grid-operasi">
+          <div id="pemForm"></div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <span class="kicker">15 Terakhir</span>
+                <h3>Riwayat Pemeliharaan</h3>
+              </div>
+            </div>
+            <div id="pemRiwayat"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PAGE: LAPORAN ============ -->
+      <section class="page" data-page="laporan">
+        <div class="stat-row" id="lapStats"></div>
+        <div class="grid-laporan">
+          <div id="lapForm"></div>
+          <div>
+            <div class="lap-tabs" id="lapTabs"></div>
+            <div class="lap-list" id="lapList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PAGE: HIPPA ============ -->
+      <section class="page" data-page="hippa">
+        <div class="stat-row" id="hippaStats"></div>
+        <div class="grid-hippa">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <span class="kicker">Kelembagaan Petani</span>
+                <h3>Daftar HIPPA / GHIPPA</h3>
+              </div>
+            </div>
+            <div id="hippaList"></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <span class="kicker">Jadwal Giling Air</span>
+                <h3>Rotasi Pengairan</h3>
+              </div>
+            </div>
+            <div id="jadwalList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PAGE: RAPORT ============ -->
+      <section class="page" data-page="raport">
+        <div class="grid-raport">
+          <div class="card score-card" id="rapScore"></div>
+          <div class="card" id="rapAspek"></div>
+        </div>
+        <div class="card" id="rapRekap" style="margin-top:20px"></div>
+      </section>
+
+      <!-- ============ PAGE: PROFIL ============ -->
+      <section class="page" data-page="profil">
+        <div class="grid-profil">
+          <div id="profilLeft"></div>
+          <div id="profilRight"></div>
+        </div>
+
+        <div class="card" id="profilTimeline" style="margin-top:20px"></div>
+
+        <div class="card" id="profilPortofolio" style="margin-top:20px"></div>
+      </section>
+
+      <!-- ============ PAGE: VERIFIKASI ============ -->
+      <section class="page" data-page="verifikasi">
+        <div id="verifContent"></div>
+      </section>
+
+    </main>
+
+    <footer class="foot">
+      Balai Besar Wilayah Sungai Brantas · Direktorat Jenderal Sumber Daya Air · Kementerian Pekerjaan Umum dan Perumahan Rakyat
+    </footer>
+  </div>
+</div>
+
+<div id="toasts"></div>
+<div id="modal" role="dialog" aria-modal="true">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card" id="mCard"></div>
+</div>
+
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/camera.js"></script>
+<script src="assets/js/data-dummy.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/portal.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script src="assets/js/presensi.js"></script>
+<script src="assets/js/verifikasi.js"></script>
+<script src="assets/js/operasi.js"></script>
+<script src="assets/js/pemeliharaan.js"></script>
+<script src="assets/js/laporan.js"></script>
+<script src="assets/js/hippa.js"></script>
+<script src="assets/js/raport.js"></script>
+<script src="assets/js/profil.js"></script>
+
+<script>
+  Portal.init();
+</script>
+</body>
+</html>

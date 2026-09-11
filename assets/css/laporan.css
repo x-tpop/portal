@@ -1,0 +1,433 @@
+/* =================================================================
+   laporan.css — Styles untuk Laporan & HIPPA/GHIPPA
+   ================================================================= */
+
+/* ============ LAYOUT LAPORAN ============ */
+.grid-laporan{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:20px;
+  align-items:start;
+  min-width:0;
+  max-width:100%;
+}
+.grid-laporan > *{
+  min-width:0;
+  max-width:100%;
+}
+
+/* ============ FORM LAPORAN ============ */
+.form-laporan{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  max-width:100%;
+  overflow:hidden;
+  position:sticky;
+  top:88px;
+}
+
+.form-laporan h3{
+  margin-bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.form-laporan h3 svg{
+  width:22px;
+  height:22px;
+  color:var(--blue);
+}
+
+/* ============ TAB FILTER ============ */
+.lap-tabs{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding-bottom:4px;
+  margin-bottom:16px;
+}
+.lap-tabs::-webkit-scrollbar{display:none}
+.lap-tab{
+  padding:8px 14px;
+  border-radius:99px;
+  border:1px solid var(--line);
+  background:#fff;
+  font:700 12.5px var(--font);
+  color:var(--ink-2);
+  white-space:nowrap;
+  cursor:pointer;
+  transition:.15s;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.lap-tab:hover{
+  border-color:var(--ink);
+  color:var(--ink);
+}
+.lap-tab.on{
+  background:var(--ink);
+  color:var(--yellow);
+  border-color:var(--ink);
+}
+.lap-tab .lt-count{
+  font:700 10.5px var(--mono);
+  background:rgba(255,255,255,.2);
+  padding:1px 6px;
+  border-radius:99px;
+}
+.lap-tab.on .lt-count{
+  background:rgba(251,185,23,.25);
+  color:var(--yellow);
+}
+
+/* ============ LIST LAPORAN ============ */
+.lap-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.lap-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  transition:.15s;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.lap-item:hover{
+  border-color:var(--blue);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+.lap-item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:var(--line);
+}
+.lap-item.status-menunggu::before{background:var(--amber)}
+.lap-item.status-diproses::before{background:var(--blue)}
+.lap-item.status-disetujui::before{background:var(--green)}
+.lap-item.status-revisi::before{background:var(--red)}
+
+.lap-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+.lap-id{
+  font:700 11px var(--mono);
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+.lap-title{
+  font:800 14px var(--font);
+  color:var(--ink);
+  margin-bottom:6px;
+  line-height:1.35;
+}
+.lap-meta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  font:600 11.5px var(--font);
+  color:var(--ink-2);
+  margin-bottom:8px;
+}
+.lap-meta span{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.lap-meta svg{width:12px;height:12px;color:var(--muted)}
+.lap-tags{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.lap-foto{
+  display:flex;
+  gap:6px;
+  margin-top:10px;
+}
+.lap-foto img{
+  width:60px;
+  height:60px;
+  border-radius:9px;
+  object-fit:cover;
+  border:1px solid var(--line);
+}
+
+/* ============ VERIFIKASI LAPORAN (KORLAP) ============ */
+.verif-actions-row{
+  display:flex;
+  gap:6px;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--line);
+  flex-wrap:wrap;
+}
+.verif-actions-row button{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:7px 12px;
+  border-radius:99px;
+  font:700 11.5px var(--font);
+  border:1.5px solid;
+  cursor:pointer;
+  transition:.15s;
+  white-space:nowrap;
+}
+.verif-actions-row .btn-ok{
+  background:var(--green-soft);
+  color:#166534;
+  border-color:rgba(22,163,74,.3);
+}
+.verif-actions-row .btn-ok:hover{
+  background:var(--green);
+  color:#fff;
+}
+.verif-actions-row .btn-no{
+  background:var(--red-soft);
+  color:#991B1B;
+  border-color:rgba(220,38,38,.3);
+}
+.verif-actions-row .btn-no:hover{
+  background:var(--red);
+  color:#fff;
+}
+.verif-actions-row .btn-det{
+  background:var(--bg);
+  color:var(--ink-2);
+  border-color:var(--line);
+}
+.verif-actions-row .btn-det:hover{
+  border-color:var(--ink);
+  color:var(--ink);
+}
+
+/* ============ HIPPA / GHIPPA ============ */
+.grid-hippa{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:20px;
+  align-items:start;
+  min-width:0;
+  max-width:100%;
+}
+.grid-hippa > *{
+  min-width:0;
+  max-width:100%;
+}
+
+/* Kartu HIPPA */
+.hippa-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  transition:.15s;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
+.hippa-card + .hippa-card{margin-top:12px}
+.hippa-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.hippa-ic{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+}
+.hippa-ic.hippa{background:var(--green-soft);color:var(--green)}
+.hippa-ic.ghippa{background:var(--purple-soft,#EDE9FE);color:var(--purple,#7C3AED)}
+.hippa-ic svg{width:22px;height:22px}
+
+.hippa-body{flex:1;min-width:0}
+.hippa-body b{
+  display:block;
+  font:800 14px var(--font);
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.hippa-body .hb-meta{
+  font:500 12px var(--font);
+  color:var(--ink-2);
+  line-height:1.5;
+  margin-bottom:8px;
+}
+.hippa-body .hb-meta strong{
+  color:var(--ink);
+  font-weight:700;
+}
+.hippa-tags{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.hippa-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font:700 10.5px var(--font);
+  padding:3px 9px;
+  border-radius:99px;
+  background:var(--bg);
+  color:var(--ink-2);
+}
+.hippa-tag.aktif{
+  background:var(--green-soft);
+  color:#166534;
+}
+.hippa-tag.dijadwalkan{
+  background:var(--blue-soft);
+  color:var(--blue-dark);
+}
+
+/* Jadwal Giling */
+.jadwal-card{
+  background:linear-gradient(135deg, #fff, #F8FAFC);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  transition:.15s;
+}
+.jadwal-card + .jadwal-card{margin-top:12px}
+.jadwal-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.jadwal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.jadwal-head b{
+  font:800 14px var(--font);
+  color:var(--ink);
+  line-height:1.3;
+}
+.jadwal-body{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  font:600 12px var(--font);
+  color:var(--ink-2);
+  margin-bottom:10px;
+}
+.jadwal-body span{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+.jadwal-body svg{width:13px;height:13px;color:var(--muted)}
+.jadwal-progress{
+  height:6px;
+  background:var(--line);
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:8px;
+}
+.jadwal-progress > span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg, var(--blue), var(--green));
+  border-radius:99px;
+}
+
+/* ============ RESPONSIF ============ */
+@media (max-width:1100px){
+  .grid-laporan,
+  .grid-hippa{
+    grid-template-columns:1fr;
+  }
+  .form-laporan{
+    position:static;
+  }
+}
+
+@media (max-width:560px){
+  .lap-tabs{
+    gap:5px;
+  }
+  .lap-tab{
+    font-size:11.5px;
+    padding:6px 11px;
+  }
+  .lap-item{
+    padding:14px;
+    border-radius:14px;
+  }
+  .lap-title{font-size:13px}
+  .lap-foto img{width:52px;height:52px}
+
+  .hippa-card{
+    padding:14px;
+    gap:12px;
+  }
+  .hippa-ic{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+  }
+  .hippa-ic svg{width:18px;height:18px}
+  .hippa-body b{font-size:13px}
+  .hippa-body .hb-meta{font-size:11.5px}
+
+  .verif-actions-row button{
+    flex:1;
+    justify-content:center;
+  }
+}
+
+/* =================================================================
+   RESPONSIF FIX OVERFLOW
+   ================================================================= */
+@media (max-width:920px){
+  .grid-laporan,
+  .grid-hippa{
+    grid-template-columns:1fr!important;
+    min-width:0;
+  }
+  .grid-laporan > *,
+  .grid-hippa > *{
+    min-width:0;
+    max-width:100%;
+  }
+  .form-laporan{
+    position:static;
+    max-width:100%;
+  }
+  .lap-item,
+  .hippa-card,
+  .jadwal-card{
+    max-width:100%;
+    overflow:hidden;
+  }
+}

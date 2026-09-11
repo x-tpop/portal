@@ -1,0 +1,829 @@
+/* =================================================================
+   presensi.css — Presensi dengan Maps Hero + Overlay Dinamis
+   ================================================================= */
+
+/* ============ LAYOUT PRESENSI ============ */
+.grid-presensi{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:26px;
+  align-items:start;
+}
+
+.pres-card{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+/* =================================================================
+   HERO MAPS — Full Width dengan Overlay Dinamis
+   ================================================================= */
+.pres-hero{
+  position:relative;
+  width:100%;
+  height:420px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  background:#000;
+  isolation:isolate;    /* stacking context baru */
+}
+
+#presMap{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+
+/* Overlay gradient agar teks terbaca */
+.pres-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.35) 0%, transparent 30%),
+    linear-gradient(to top, rgba(0,0,0,.35) 0%, transparent 40%);
+  pointer-events:none;
+  z-index:2;
+}
+
+/* Container overlay (kiri atas) */
+.pres-overlay{
+  position:absolute;
+  top:20px;
+  left:20px;
+  right:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:5;
+  pointer-events:none;
+}
+.pres-overlay > *{
+  pointer-events:auto;
+}
+
+/* Kartu status (glassmorphism) */
+.pres-status-card{
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:18px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  box-shadow:0 10px 32px -8px rgba(0,0,0,.25);
+  max-width:420px;
+  transition:.2s;
+}
+.pres-status-card .psc-ic{
+  width:42px;
+  height:42px;
+  border-radius:99px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  background:var(--amber-soft);
+  color:var(--amber);
+  position:relative;
+}
+.pres-status-card .psc-ic svg{
+  width:20px;
+  height:20px;
+  display:block;
+}
+.pres-status-card.selesai .psc-ic{
+  background:var(--green-soft);
+  color:var(--green);
+}
+.pres-status-card.kerja .psc-ic{
+  background:var(--blue-soft);
+  color:var(--blue);
+}
+.pres-status-card.belum .psc-ic{
+  background:var(--amber-soft);
+  color:var(--amber);
+}
+.pres-status-card .psc-txt{
+  flex:1;
+  min-width:0;
+}
+.pres-status-card .psc-txt b{
+  display:block;
+  font:800 14px var(--font);
+  color:var(--ink);
+  margin-bottom:2px;
+  line-height:1.3;
+}
+.pres-status-card .psc-txt span{
+  font:600 12px var(--font);
+  color:var(--ink-2);
+}
+
+/* Kartu GPS info (glassmorphism) */
+.pres-gps-card{
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:16px;
+  padding:12px 16px;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  box-shadow:0 10px 32px -8px rgba(0,0,0,.25);
+  max-width:420px;
+  transition:.2s;
+}
+.pres-gps-card .gps-ic{
+  width:34px;
+  height:34px;
+  border-radius:99px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  position:relative;
+}
+.pres-gps-card .gps-ic svg{
+  width:16px;
+  height:16px;
+  display:block;
+}
+.pres-gps-card .gps-txt{
+  flex:1;
+  min-width:0;
+  font:500 12px var(--font);
+  color:var(--ink-2);
+  line-height:1.5;
+}
+.pres-gps-card .gps-txt b{
+  display:block;
+  font:800 13px var(--font);
+  color:var(--ink);
+  margin-bottom:3px;
+}
+.pres-gps-card .gps-txt code{
+  font:600 11.5px var(--mono);
+  color:var(--ink-2);
+  background:rgba(30,58,138,.06);
+  padding:1px 6px;
+  border-radius:4px;
+  word-break:break-all;
+}
+.pres-gps-card .gps-txt .gps-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:5px;
+}
+.pres-gps-card .gps-txt .gps-meta span{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font:700 11px var(--font);
+  padding:2px 8px;
+  border-radius:99px;
+  background:var(--bg);
+}
+.pres-gps-card .gps-txt .gps-meta span b{
+  display:inline;
+  font:800 11px var(--mono);
+  color:var(--ink);
+  margin:0;
+}
+
+/* Warna state GPS */
+.pres-gps-card.ok{background:rgba(220,252,231,.92)}
+.pres-gps-card.ok .gps-ic{background:var(--green);color:#fff}
+.pres-gps-card.warn{background:rgba(254,243,199,.92)}
+.pres-gps-card.warn .gps-ic{background:var(--amber);color:#fff}
+.pres-gps-card.error{background:rgba(254,226,226,.92)}
+.pres-gps-card.error .gps-ic{background:var(--red);color:#fff}
+.pres-gps-card.loading{background:rgba(219,234,254,.92)}
+.pres-gps-card.loading .gps-ic{
+  background:var(--blue);
+  color:#fff;
+}
+.pres-gps-card.loading .gps-ic svg{
+  animation:spin 1.2s linear infinite;
+}
+
+/* Status loading state */
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Marker user (biru berdenyut) */
+.marker-user{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--blue);
+  border:3px solid #fff;
+  box-shadow:0 2px 8px rgba(37,99,235,.6);
+  position:relative;
+}
+.marker-user::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  background:rgba(37,99,235,.35);
+  animation:userPulse 1.8s ease-out infinite;
+}
+@keyframes userPulse{
+  0%{transform:scale(.6);opacity:1}
+  100%{transform:scale(1.8);opacity:0}
+}
+
+/* Marker titik tugas (kuning) */
+.marker-tugas{
+  width:32px;
+  height:32px;
+  border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);
+  background:var(--yellow);
+  border:3px solid #fff;
+  box-shadow:0 3px 10px rgba(0,0,0,.4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.marker-tugas svg{
+  transform:rotate(45deg);
+  color:#fff;
+  width:14px;
+  height:14px;
+  display:block;
+}
+
+/* Akurasi lingkaran GPS */
+.accuracy-circle{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(37,99,235,.12);
+  border:1.5px solid rgba(37,99,235,.35);
+  pointer-events:none;
+}
+
+/* Sembunyikan watermark Leaflet */
+.leaflet-control-attribution,
+.leaflet-control-attribution a{
+  display:none!important;
+}
+
+/* Leaflet container */
+.leaflet-container{
+  font-family:var(--font)!important;
+  background:#000!important;
+}
+
+/* =================================================================
+   JAM & TIMELINE CHECK-IN/OUT
+   ================================================================= */
+.pres-clock-card{
+  padding:22px 20px;
+  background:linear-gradient(145deg, #fff, #F8FAFC);
+  border:1px solid var(--line);
+  border-radius:20px;
+  text-align:center;
+}
+.pres-clock-card .pct{
+  font:700 clamp(38px,4.5vw,52px) var(--mono);
+  letter-spacing:.02em;
+  color:var(--ink);
+  line-height:1;
+}
+.pres-clock-card .pct small{
+  font:600 13px var(--mono);
+  color:var(--muted);
+  margin-left:6px;
+}
+.pres-clock-card .pcd{
+  font:600 13px var(--font);
+  color:var(--ink-2);
+  margin-top:8px;
+}
+
+/* Timeline check-in/out */
+.ptl{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:8px 0;
+}
+.ptl-node{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex:none;
+}
+.ptl-ic{
+  width:46px;
+  height:46px;
+  border-radius:99px;
+  background:var(--bg);
+  border:1.5px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  transition:.2s;
+  flex:none;
+  padding:0;
+  position:relative;
+}
+.ptl-ic svg{
+  width:20px;
+  height:20px;
+  display:block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.ptl-node.done .ptl-ic{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:#fff;
+  box-shadow:0 4px 12px rgba(37,99,235,.3);
+}
+.ptl-node > div{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.ptl-node span{
+  font:700 11px var(--font);
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:block;
+  line-height:1.2;
+}
+.ptl-node b{
+  font:700 17px var(--mono);
+  color:var(--ink);
+  line-height:1.2;
+}
+.ptl-line{
+  flex:1;
+  height:3px;
+  border-radius:99px;
+  background:var(--line);
+  transition:.3s;
+}
+.ptl.on .ptl-line{background:var(--blue)}
+
+/* =================================================================
+   KAMERA BOX
+   ================================================================= */
+.cam-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.cam-box{
+  position:relative;
+  border:1.5px dashed var(--line);
+  border-radius:16px;
+  padding:20px 14px;
+  text-align:center;
+  cursor:pointer;
+  transition:.15s;
+  background:var(--bg);
+  min-height:140px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  overflow:hidden;
+}
+.cam-box:hover{
+  border-color:var(--blue);
+  background:var(--blue-soft);
+}
+.cam-box.has-photo{
+  border-style:solid;
+  border-color:var(--green);
+  padding:0;
+  background:#000;
+}
+.cam-box .cb-ic{
+  width:46px;
+  height:46px;
+  border-radius:99px;
+  background:var(--card);
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--blue);
+  position:relative;
+}
+.cam-box .cb-ic svg{
+  width:22px;
+  height:22px;
+  display:block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.cam-box .cb-txt b{
+  display:block;
+  font:700 13px var(--font);
+  color:var(--ink);
+  margin-bottom:2px;
+}
+.cam-box .cb-txt small{
+  font:500 11.5px var(--font);
+  color:var(--muted);
+}
+.cam-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  inset:0;
+}
+.cam-box .cb-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.65), transparent 55%);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding:10px 12px;
+  color:#fff;
+  z-index:2;
+}
+.cam-box .cb-overlay b{
+  font:700 11.5px var(--font);
+  text-shadow:0 1px 2px rgba(0,0,0,.4);
+}
+.cam-box .cb-overlay .cb-del{
+  width:32px;
+  height:32px;
+  border-radius:99px;
+  border:0;
+  background:rgba(220,38,38,.9);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  position:relative;
+}
+.cam-box .cb-overlay .cb-del svg{
+  width:14px;
+  height:14px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.cam-box .cb-overlay .cb-del:hover{background:var(--red)}
+
+/* =================================================================
+   TOMBOL AKSI
+   ================================================================= */
+.btn-act{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:16px 24px;
+  border-radius:16px;
+  border:0;
+  font:800 15px var(--font);
+  cursor:pointer;
+  transition:.2s;
+  color:#fff;
+  background:var(--blue);
+}
+.btn-act:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px -8px rgba(37,99,235,.5);
+}
+.btn-act:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+.btn-act.masuk{background:var(--blue)}
+.btn-act.keluar{background:var(--green)}
+.btn-act.keluar:hover:not(:disabled){
+  box-shadow:0 12px 24px -8px rgba(22,163,74,.5);
+}
+.btn-act svg{width:20px;height:20px}
+
+/* =================================================================
+   RINGKASAN & RIWAYAT
+   ================================================================= */
+.ringkasan-card{
+  position:sticky;
+  top:88px;
+}
+.ring-sum{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:16px 0;
+}
+.ring-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:var(--bg);
+  border-radius:14px;
+  padding:12px 14px;
+}
+.ring-item .ri-ic{
+  width:38px;
+  height:38px;
+  border-radius:99px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  position:relative;
+}
+.ring-item .ri-ic svg{
+  width:17px;
+  height:17px;
+  display:block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.ring-item b{
+  font:700 20px var(--mono);
+  color:var(--ink);
+  display:block;
+  line-height:1;
+  margin-bottom:2px;
+}
+.ring-item span{
+  font:700 10px var(--font);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.pres-history{
+  margin-top:20px;
+  max-height:420px;
+  overflow-y:auto;
+  padding-right:6px;
+}
+.pres-history::-webkit-scrollbar{width:6px}
+.pres-history::-webkit-scrollbar-thumb{
+  background:#CBD5E1;
+  border-radius:99px;
+}
+.ph-item{
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px dashed var(--line);
+  align-items:center;
+}
+.ph-item:last-child{border-bottom:0}
+.ph-item .ph-date{
+  width:52px;
+  flex:none;
+  text-align:center;
+  background:var(--bg);
+  border-radius:10px;
+  padding:6px 4px;
+}
+.ph-item .ph-date b{
+  display:block;
+  font:800 16px var(--mono);
+  color:var(--ink);
+  line-height:1;
+}
+.ph-item .ph-date small{
+  font:700 9.5px var(--font);
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.ph-item .ph-info{flex:1;min-width:0}
+.ph-item .ph-info b{
+  display:block;
+  font:700 13px var(--font);
+  color:var(--ink);
+  margin-bottom:2px;
+}
+.ph-item .ph-info span{
+  font:500 12px var(--mono);
+  color:var(--ink-2);
+}
+
+/* =================================================================
+   VERIFIKASI
+   ================================================================= */
+.verif-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  transition:.15s;
+  box-shadow:var(--shadow);
+}
+.verif-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-2px);
+}
+.verif-card + .verif-card{margin-top:14px}
+.verif-avatar{
+  width:56px;
+  height:56px;
+  border-radius:14px;
+  object-fit:cover;
+  border:2px solid var(--line);
+  flex:none;
+}
+.verif-body{flex:1;min-width:0}
+.verif-body b{
+  display:block;
+  font:800 14.5px var(--font);
+  color:var(--ink);
+  margin-bottom:2px;
+}
+.verif-body .v-meta{
+  font:500 12.5px var(--font);
+  color:var(--ink-2);
+  margin-bottom:8px;
+}
+.verif-body .v-tags{display:flex;gap:6px;flex-wrap:wrap}
+.verif-foto{display:flex;gap:8px;margin-top:12px}
+.verif-foto img{
+  width:80px;
+  height:80px;
+  border-radius:10px;
+  object-fit:cover;
+  border:1px solid var(--line);
+  cursor:pointer;
+  transition:.15s;
+}
+.verif-foto img:hover{
+  transform:scale(1.05);
+  border-color:var(--blue);
+}
+.verif-actions{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  flex:none;
+}
+.verif-actions button{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:9px 14px;
+  border-radius:99px;
+  font:700 12.5px var(--font);
+  border:1.5px solid;
+  cursor:pointer;
+  transition:.15s;
+  white-space:nowrap;
+}
+.verif-actions .btn-ok{
+  background:var(--green-soft);
+  color:#166534;
+  border-color:rgba(22,163,74,.3);
+}
+.verif-actions .btn-ok:hover{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+.verif-actions .btn-no{
+  background:var(--red-soft);
+  color:#991B1B;
+  border-color:rgba(220,38,38,.3);
+}
+.verif-actions .btn-no:hover{
+  background:var(--red);
+  color:#fff;
+  border-color:var(--red);
+}
+.verif-actions .btn-det{
+  background:var(--bg);
+  color:var(--ink-2);
+  border-color:var(--line);
+}
+.verif-actions .btn-det:hover{
+  border-color:var(--ink);
+  color:var(--ink);
+}
+
+/* =================================================================
+   RESPONSIF
+   ================================================================= */
+@media (max-width:1100px){
+  .grid-presensi{grid-template-columns:1fr}
+  .ringkasan-card{position:static}
+  .pres-history{max-height:none}
+}
+
+@media (max-width:920px){
+  .pres-hero{height:380px}
+  .pres-status-card{max-width:100%}
+  .pres-gps-card{max-width:100%}
+}
+
+@media (max-width:560px){
+  .pres-hero{height:340px}
+  .pres-overlay{
+    top:14px;
+    left:14px;
+    right:14px;
+    gap:8px;
+  }
+  .pres-status-card{
+    padding:12px 14px;
+    gap:10px;
+  }
+  .pres-status-card .psc-ic{
+    width:36px;
+    height:36px;
+  }
+  .pres-status-card .psc-ic svg{width:18px;height:18px}
+  .pres-status-card .psc-txt b{font-size:12.5px}
+  .pres-status-card .psc-txt span{font-size:11px}
+
+  .pres-gps-card{
+    padding:10px 12px;
+    gap:10px;
+  }
+  .pres-gps-card .gps-ic{
+    width:30px;
+    height:30px;
+  }
+  .pres-gps-card .gps-ic svg{width:14px;height:14px}
+  .pres-gps-card .gps-txt{font-size:11px}
+  .pres-gps-card .gps-txt b{font-size:12px}
+
+  .cam-grid{grid-template-columns:1fr}
+  .cam-box{min-height:120px}
+  .ptl-node span{font-size:10px}
+  .ptl-node b{font-size:15px}
+  .ptl-ic{width:40px;height:40px}
+  .ptl-ic svg{width:18px;height:18px}
+  .ring-sum{grid-template-columns:1fr}
+  .verif-card{flex-direction:column}
+  .verif-actions{flex-direction:row;width:100%}
+  .verif-actions button{flex:1;justify-content:center}
+
+  .cm-head{padding:14px 16px}
+  .cm-head h3{font-size:15px}
+  .cm-guide-frame{width:72%;height:60%}
+  .cm-corner{width:30px;height:30px;border-width:2.5px}
+  .cm-guide-label{bottom:-46px;font-size:11.5px;padding:7px 14px}
+  .cm-shutter{width:66px;height:66px;border-width:3.5px}
+  .cm-shutter::after{width:50px;height:50px}
+  .cm-foot{gap:20px;padding:18px}
+}
+
+/* =================================================================
+   TAMBAHAN: Modal Camera Fullscreen
+   ================================================================= */
+#modal.cam-fullscreen{
+  padding:0;
+  place-items:stretch;
+}
+#modal.cam-fullscreen .modal-bg{display:none}
+#modal.cam-fullscreen .modal-card{
+  width:100vw;
+  max-width:100vw;
+  height:100vh;
+  max-height:100vh;
+  margin:0;
+  border-radius:0;
+  border:0;
+  background:#000;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  animation:none;
+  padding:0;
+}
+body:has(#modal.cam-fullscreen.open){
+  overflow:hidden!important;
+}
+
+/* Sembunyikan info teknis format */
+.cm-info,.cm-info-item{display:none!important}

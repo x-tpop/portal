@@ -1,0 +1,158 @@
+/* =================================================================
+   responsive.css — Media Queries + Fix Overflow
+   ================================================================= */
+
+@media (max-width:1100px){
+  .id-card{flex-direction:column;align-items:stretch}
+  .id-stats{display:grid;grid-template-columns:1fr 1fr}
+  .grid-dash,.grid-dash-full{grid-template-columns:1fr}
+  .frow3{grid-template-columns:1fr 1fr}
+  .span2{grid-column:span 2}
+}
+
+@media (max-width:920px){
+  aside{display:none}
+  .main{
+    margin-left:0;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  #bnav{display:flex}
+  body{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+  .tb-brand-m{display:flex}
+  .tb-title{display:none}
+
+  .role-switch{display:none!important}
+  .role-chip-static{display:inline-flex!important}
+
+  .tb-in{padding:10px 12px;gap:10px}
+  .tb-brand-m b{font-size:13.5px}
+  .tb-brand-m small{font-size:9px}
+  .tb-brand-m svg{width:30px;height:30px}
+
+  .me-chip{padding:5px 10px 5px 5px;gap:8px}
+  .me-chip img{width:30px;height:30px}
+  .me-chip span{font-size:12.5px}
+
+  .icon-btn{width:38px;height:38px}
+
+  .wrap{padding:0 12px}
+  .card{padding:18px}
+  .page{padding-top:20px}
+  #toasts{right:12px;left:12px;bottom:calc(112px + env(safe-area-inset-bottom))}
+
+  #mapDashboard{height:340px}
+}
+
+@media (max-width:560px){
+  .me-chip span{display:none}
+  .tb-time{display:none}
+  .id-stats{grid-template-columns:1fr 1fr}
+  .stat{min-width:0;padding:12px 14px}
+  .frow,.frow3{grid-template-columns:1fr}
+  .span2{grid-column:span 1}
+  .mini-stats{grid-template-columns:1fr 1fr}
+  .mini-stats .ms:last-child{grid-column:span 2}
+
+  .tb-in{padding:8px 10px;gap:8px}
+  .tb-brand-m b{font-size:13px}
+  .tb-brand-m small{display:none}
+  .tb-brand-m svg{width:28px;height:28px}
+
+  .me-chip{padding:4px 8px 4px 4px}
+  .me-chip img{width:28px;height:28px}
+
+  .icon-btn{width:36px;height:36px}
+  .icon-btn svg{width:16px;height:16px}
+
+  .role-chip-static{
+    font-size:10.5px!important;
+    padding:3px 8px!important;
+  }
+  .role-chip-static span{display:none}
+
+  .wrap{padding:0 10px}
+  .card{padding:14px}
+  .page{padding-top:16px}
+
+  .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .stat{padding:10px 12px;gap:10px}
+  .stat .ic{width:36px;height:36px}
+  .stat b{font-size:18px}
+  .stat > div > span:last-child{font-size:9.5px}
+
+  #mapDashboard{height:300px}
+  .map-card .card-head{padding:16px 18px 12px}
+}
+
+/* =================================================================
+   FIX OVERFLOW HORIZONTAL — SEMUA GRID & CARD
+   ================================================================= */
+@media (max-width:920px){
+  /* Semua grid jadi 1 kolom */
+  .grid-dash,
+  .grid-dash-full,
+  .rekap-grid,
+  .grid-presensi,
+  .grid-lapor,
+  .grid-pres,
+  .grid-rap,
+  .grid-bio{
+    grid-template-columns:1fr!important;
+    min-width:0;
+  }
+
+  /* Anak grid tidak boleh overflow */
+  .grid-dash-full > *,
+  .rekap-grid > *,
+  .grid-dash > *{
+    min-width:0;
+    max-width:100%;
+  }
+
+  /* Semua card tidak boleh overflow */
+  .card,
+  .mini-card,
+  .stat,
+  .cta-card,
+  .ringkasan-card,
+  .map-card,
+  .pres-card{
+    max-width:100%;
+    min-width:0;
+    overflow:hidden;
+  }
+
+  /* Wrap utama */
+  .wrap{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  /* Main content */
+  .main{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  /* Body tidak boleh scroll horizontal */
+  body{
+    overflow-x:hidden;
+  }
+
+  /* Tabel tidak keluar card */
+  .tbl-wrap{
+    max-width:100%;
+    min-width:0;
+    overflow-x:auto;
+  }
+
+  /* Gambar tidak keluar */
+  img{
+    max-width:100%;
+    height:auto;
+  }
+}
